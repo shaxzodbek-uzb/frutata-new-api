@@ -23,30 +23,4 @@ class PartnerController extends Controller
             'partner' => $partner
         ]);
     }
-    // store
-    public function store(Request $request)
-    {
-        $partner = Partner::create($request->all());
-        return response()->json([
-            'partner' => $partner
-        ]);
-    }
-    // update
-    public function update(Request $request, $id)
-    {
-        $partner = Partner::find($id);
-        $partner->update($request->all());
-        return response()->json([
-            'partner' => $partner
-        ]);
-    }
-    // destroy
-    public function destroy($id)
-    {
-        $partner = Partner::find($id);
-        $partner->delete();
-        return response()->json([
-            'success' => true
-        ]);
-    }
 }

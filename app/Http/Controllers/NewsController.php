@@ -23,30 +23,4 @@ class NewsController extends Controller
             'news' => $news
         ]);
     }
-    // store
-    public function store(Request $request)
-    {
-        $news = News::create($request->all());
-        return response()->json([
-            'news' => $news
-        ]);
-    }
-    // update
-    public function update(Request $request, $id)
-    {
-        $news = News::find($id);
-        $news->update($request->all());
-        return response()->json([
-            'news' => $news
-        ]);
-    }
-    // destroy
-    public function destroy($id)
-    {
-        $news = News::find($id);
-        $news->delete();
-        return response()->json([
-            'success' => true
-        ]);
-    }
 }

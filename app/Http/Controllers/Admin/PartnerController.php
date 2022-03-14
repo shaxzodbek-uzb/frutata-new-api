@@ -27,7 +27,21 @@ class PartnerController extends Controller
     // store
     public function store(Request $request)
     {
-        $partner = Partner::create($request->all());
+        $data = $this->validate($request, [
+            'name' => 'required',
+            'name_ru' => 'required',
+            'name_en' => 'required',
+            'image' => 'required|file|max:5120',
+            'description' => 'required',
+            'description_ru' => 'required',
+            'description_en' => 'required',
+        ]);
+
+
+        $data['image'] = $this->uploadImageFile($request->file('image'));
+
+
+        $partner = Partner::create($data);
         return response()->json([
             'partner' => $partner
         ]);
@@ -35,8 +49,26 @@ class PartnerController extends Controller
     // update
     public function update(Request $request, $id)
     {
-        $partner = Partner::find($id);
-        $partner->update($request->all());
+
+        $partner = Partner::findOrFail($id);
+        $data = $this->validate($request, [
+            'name' => 'required',
+            'name_ru' => 'required',
+            'name_en' => 'required',
+            'image' => 'required|file|max:5120',
+            'description' => 'required',
+            'description_ru' => 'required',
+            'description_en' => 'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadImageFile($request->file('image'));
+        } else {
+            unset($data['image']);
+        }
+
+        $partner->update($data);
+
         return response()->json([
             'partner' => $partner
         ]);

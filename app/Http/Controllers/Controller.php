@@ -10,4 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    function uploadImageFile($image)
+    {
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $new_name);
+        $image_path = 'images/' . $new_name;
+        return $image_path;
+    }
 }

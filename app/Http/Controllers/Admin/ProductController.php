@@ -11,7 +11,7 @@ class ProductController extends Controller
     // index
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(3);
         return response()->json([
             'products' => $products
         ]);
@@ -37,10 +37,9 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required',
         ]);
-        $image = $request->file('image');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
-        $data['image'] = 'images/' . $new_name;
+
+        $data['image'] = $this->uploadImageFile($request->file('image'));
+
         $product = Product::create($data);
         return response()->json([
             'product' => $product
@@ -61,10 +60,7 @@ class ProductController extends Controller
             'price' => 'required',
         ]);
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $new_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $new_name);
-            $data['image'] = 'images/' . $new_name;
+            $data['image'] = $this->uploadImageFile($request->file('image'));
         } else {
             unset($data['image']);
         }

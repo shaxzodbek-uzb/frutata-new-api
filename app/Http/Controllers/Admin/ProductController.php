@@ -8,22 +8,8 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // index
-    public function index()
-    {
-        $products = Product::paginate(3);
-        return response()->json([
-            'products' => $products
-        ]);
-    }
-    // show
-    public function show($id)
-    {
-        $product = Product::find($id);
-        return response()->json([
-            'product' => $product
-        ]);
-    }
+    protected $model = Product::class;
+
     // store
     public function store(Request $request)
     {

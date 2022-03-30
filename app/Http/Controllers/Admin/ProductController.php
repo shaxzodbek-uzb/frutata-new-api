@@ -20,11 +20,11 @@ class ProductController extends Controller
             'description' => 'required',
             'description_ru' => 'required',
             'description_en' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required',
         ]);
 
-        $data['image'] = $this->uploadImageFile($request->file('image'));
+        $data['image'] = '';//$this->uploadImageFile($request->file('image'));
 
         $product = Product::create($data);
         return response()->json([
@@ -42,7 +42,7 @@ class ProductController extends Controller
             'description' => 'required',
             'description_ru' => 'required',
             'description_en' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required',
         ]);
         if ($request->hasFile('image')) {

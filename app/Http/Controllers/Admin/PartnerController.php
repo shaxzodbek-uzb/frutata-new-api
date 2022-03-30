@@ -17,14 +17,14 @@ class PartnerController extends Controller
             'name' => 'required',
             'name_ru' => 'required',
             'name_en' => 'required',
-            'image' => 'required|file|max:5120',
+            // 'image' => 'required|file|max:5120',
             'description' => 'required',
             'description_ru' => 'required',
             'description_en' => 'required',
         ]);
 
 
-        $data['image'] = $this->uploadImageFile($request->file('image'));
+        $data['image'] = '';//$this->uploadImageFile($request->file('image'));
 
 
         $partner = Partner::create($data);
@@ -41,7 +41,7 @@ class PartnerController extends Controller
             'name' => 'required',
             'name_ru' => 'required',
             'name_en' => 'required',
-            'image' => 'required|file|max:5120',
+            // 'image' => 'required|file|max:5120',
             'description' => 'required',
             'description_ru' => 'required',
             'description_en' => 'required',

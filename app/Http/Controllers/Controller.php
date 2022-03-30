@@ -45,7 +45,7 @@ class Controller extends BaseController
     {
         $item = $this->model_query->find($id);
         return response()->json([
-            $this->model_name_plural => $item
+            $this->model_name => $item
         ]);
     }
 }

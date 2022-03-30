@@ -18,15 +18,15 @@ class NewsController extends Controller
             'title' => 'required',
             'title_ru' => 'required',
             'title_en' => 'required',
-            'image' => 'required|image|max:5120',
+            // 'image' => 'required|image|max:5120',
             'content' => 'required',
             'content_ru' => 'required',
             'content_en' => 'required',
         ]);
 
         // image upload
-        $data['image'] = $this->uploadImageFile($request->file('image'));
-
+        // $data['image'] = $this->uploadImageFile($request->file('image'));
+        $data['image'] = '';
         $news = News::create($data);
         return response()->json([
             'news' => $news
@@ -42,7 +42,7 @@ class NewsController extends Controller
             'title' => 'required',
             'title_ru' => 'required',
             'title_en' => 'required',
-            'image' => 'image|max:5120',
+            // 'image' => 'image|max:5120',
             'content' => 'required',
             'content_ru' => 'required',
             'content_en' => 'required',
